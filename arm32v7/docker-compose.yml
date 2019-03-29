@@ -11,10 +11,10 @@ services:
          - MYSQL_USER=observium
          - MYSQL_PASSWORD=passw0rd
          - MYSQL_DATABASE=observium
-         - TZ=Asia/Bangkok
+         - TZ=Europe/Berlin
        volumes:
-         - /home/docker/observium/data:/var/lib/mysql
-#         - /home/docker/observium/mysql:/docker-entrypoint-initdb.d
+         - /mnt/data/docker/observium/data:/var/lib/mysql
+#         - /mnt/data/docker/observium/mysql:/docker-entrypoint-initdb.d
        networks:
          - back-tier
        restart: always
@@ -26,17 +26,17 @@ services:
          - OBSERVIUM_ADMIN_PASS=passw0rd
          - OBSERVIUM_DB_HOST=observiumdb
          - OBSERVIUM_DB_NAME=observium
-         - OBSERVIUM_DB_USER=observium 
+         - OBSERVIUM_DB_USER=observium
          - OBSERVIUM_DB_PASS=passw0rd
          - TZ=Asia/Bangkok
        volumes:
-         - /home/docker/observium/logs:/opt/observium/logs
-#         - /home/docker/observium/lock:/opt/observium/lock
-         - /home/docker/observium/rrd:/opt/observium/rrd
+         - /mnt/data/docker/observium/logs:/opt/observium/logs
+#         - /mnt/data/docker/observium/lock:/opt/observium/lock
+         - /mnt/data/docker/observium/rrd:/opt/observium/rrd
        networks:
          - back-tier
        ports:
-         - "80:80"
+         - "8042:80"
        restart: always
        depends_on:
          - observiumdb
@@ -44,4 +44,3 @@ services:
 networks:
   back-tier:
       driver: bridge
-
